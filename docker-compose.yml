@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  server:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      DEBUG: "True"
+      DJANGO_DB: postgresql
+      POSTGRES_HOST: db
+      POSTGRES_NAME: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.0-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    # Exposes port inside docker network: db:5432
+    expose:
+      - 5432
+
+    # Exposes port for host machine: localhost:5432
+    ports:
+      - "5432:5432"
+
+volumes:
+    postgres_data: {}
+    static_volume: {}
