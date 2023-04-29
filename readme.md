@@ -28,7 +28,7 @@ To run this project, you'll need the following:
 2. Build and run the Docker containers:
 
     ```sh
-    docker-compose up --build
+    docker-compose up --build -d
     ```
 
 3. Create the Django database tables:
@@ -42,26 +42,6 @@ To run this project, you'll need the following:
 5. Docs should now be available
    at [http://localhost:8000/api/schema/swagger-ui/](http://localhost:8000/api/schema/swagger-ui/)
 
-## Development
-
-To start a development server:
-
-1. Build and run the Docker containers:
-
-    ```sh
-    docker-compose up --build
-    ```
-
-2. Run Django's development server:
-
-    ```sh
-    docker-compose exec server python manage.py runserver 0.0.0.0:8000
-    ```
-
-3. The API should now be available at [http://localhost:8000/](http://localhost:8000/).
-
-4. Docs should now be available
-   at [http://localhost:8000/api/schema/swagger-ui/](http://localhost:8000/api/schema/swagger-ui/)
 
 ## Testing
 
