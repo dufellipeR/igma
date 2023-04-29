@@ -3,3 +3,4 @@ djangorestframework==3.14
 psycopg2-binary==2.9.6
 django-cors-headers==3.14
 django-filter==23.1
+drf-spectacular==0.26.2
