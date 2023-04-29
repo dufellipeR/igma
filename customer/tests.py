@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import APIRequestFactory
 
 from .models import Customer
-from .views import CustomerList, CustomerDetail, CustomerCreate
+from .views import CustomerList, CustomerDetail, CustomerCreate, CustomerDetailByCPF
 from .helpers import sanitize_cpf, validate_cpf, sum_digits, make_safe_digit
 
 
@@ -92,8 +92,17 @@ class CustomerDetailTest(TestCase):
         self.assertEqual(response.data['name'], self.customer[0].name)
         self.assertEqual(response.data['CPF'], self.customer[0].CPF)
 
+
+class CustomerDetailByCPFTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.factory = APIRequestFactory()
+        cls.customer = Customer.objects.get_or_create(name="Satoshi Nakamoto", born="2008-10-31", CPF="20802113079")
+        Customer.objects.get_or_create(name="Hal Finey", born="1956-05-04", CPF="97088230070")
+        Customer.objects.get_or_create(name="Adam Back", born="1970-07-30", CPF="61876157003")
+
     def test_retrieve_customer_by_cpf(self):
-        view = CustomerDetail.as_view()
+        view = CustomerDetailByCPF.as_view()
 
         payload = {"CPF": self.customer[0].CPF}
         request = self.factory.post(f'detail', payload, format='json')
@@ -105,7 +114,7 @@ class CustomerDetailTest(TestCase):
         self.assertEqual(response.data['CPF'], self.customer[0].CPF)
 
     def test_retrieve_customer_by_cpf_with_mask(self):
-        view = CustomerDetail.as_view()
+        view = CustomerDetailByCPF.as_view()
 
         payload = {"CPF": "208.021.130-79"}
         request = self.factory.post(f'detail', payload, format='json')
