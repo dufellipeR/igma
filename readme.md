@@ -2,6 +2,14 @@
 
 This project is a Django REST Framework (DRF) API built with Docker
 
+## Overview
+
+- Tests: customer/tests.py
+- Endpoints: customer/views.py
+- CPF Validator: customer/helpers.py
+- Schema: customer/models.py
+
+
 ## Requirements
 
 To run this project, you'll need the following:
@@ -9,12 +17,6 @@ To run this project, you'll need the following:
 - Docker
 - Docker Compose
 
-## Overview
-
-- Tests: *tests.py*
-- Endpoints: *views.py*
-- CPF Validator: *helpers.py*
-- Schema: *models.py*
 
 ## Getting Started
 
@@ -65,8 +67,6 @@ To run the tests:
 ```sh
 docker-compose exec server python manage.py test
 ```
-
-Location: *tests.py*
 
 ## Configuration
 
