@@ -28,6 +28,8 @@ class CustomerCreate(generics.CreateAPIView):
         sanitized_cpf = sanitize_cpf(request.data.get('CPF'))
         if not validate_cpf(sanitized_cpf):
             return Response({'error': 'Not a valid CPF'}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        request.data['CPF'] = sanitized_cpf
+
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             self.perform_create(serializer)
