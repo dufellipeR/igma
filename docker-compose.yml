@@ -9,6 +9,7 @@ services:
       - .:/app
     environment:
       DEBUG: "True"
+      DJANGO_SECRET: "(=z76oxhe2qe@^rdnh8utkc43!#c@37ecro#6n-)p5_b_gm*-a"
       DJANGO_DB: postgresql
       POSTGRES_HOST: db
       POSTGRES_NAME: postgres
